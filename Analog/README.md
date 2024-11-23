@@ -3,7 +3,7 @@ This folder contains the following components:
 
 ## Files
 - **Report.pdf**: Detailed report of the project.
-- **close_circuit.mdl**: Simulink model for the closed-loop simulation.
+  - **close_circuit.mdl**: Simulink model for the closed-loop simulation.
 - **compensator.m**: MATLAB script for compensator design.
 - **open_circuit.mdl**: Simulink model for the open-loop simulation.
 
