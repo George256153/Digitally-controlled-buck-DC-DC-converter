@@ -2,29 +2,26 @@
 
 ## Objectives
 1. 9bit Counter-based DPWM
-2. 9bit Hybridr DPWM
+2. 9bit Hybrid DPWM
 3. 9bit Dither DPWM
 4. 9bit Dither DPWM with dead-time
 
-## Design process
+## Design structure & Process
 - 9bit Counter-based DPWM
-  -
-2. Convert the compensator coefficients into binary form
-   - Necessary to shift the decimal numbers forward, convert them into binary, and then revert them afterward
-   - The precision of the conversion is positively correlated with the bit-shift amount
-   - The bit-shift amount must match the number of bits required for the LUT.
-3. Multiply the coefficients with the input results to determine the number of bits and the internal value of LUT
-4. Build the Verilog code of digital compensator
-   - Modulate the integer number to be consistent with the LUT results
-   - Fill in the results in the Look-up-table
-   - truncation
-   - Hardware Implementation structure
-     <img src="../image/LUT.png" alt="LUT" width="80%">
-5. Build Matlab Model with Modelsim
-6. Co-Simulation with Matlab/Modelsim
-   - Buck converter closed-loop simulation (including power stage, PWM, 
-compensator)
-
-## Design Schematic
-<img src="../image/Compensator.png" alt="Compensator" width="80%">
+  - Realize with a counter, 2 comparators and a SR latch
+    <img src="../image/Counter.png" alt="Counter" width="80%">
+- 9bit Hybrid DPWM
+  - Realize with mixture of a 6bits DPWM nad a 3bits delay line
+     <img src="../image/Hybrid.png" alt="Hybrid" width="80%">
+- 9bit Dither DPWM
+  - **Top module**: The duty signal output from the compensator first enters the dither system and the first 6 bits are taken during the cycle. After processing, they are input to the 6-bit format.
+  - **Clk**: First divide the input clock frequency using a counter to match the required 1 MHz frequency for the Dither module. Then, implement the logic in Verilog to toggle the clock signal and reset the counter appropriately when it reaches the specified value.
+counter DPWM for processing
+  - Schematic (use 8bits Dither DPWM as an example)
+    <img src="../image/Dither.png" alt="Dither" width="80%">
+- 9bit Dither DPWM with dead-time
+  - Use a counter to track clock cycles and generate duty cycle signals by comparing the counter value to predefined thresholds for high and low states
+  - Implement two comparators (duty_high and duty_low) to control the PWM output while ensuring a dead-time is maintained to prevent overlap.
+  - Schematic (use 8bits Dither DPWM as an example)
+    <img src="../image/Deadtime.png" alt="Deadtim" width="80%">
 
