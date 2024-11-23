@@ -21,7 +21,12 @@
 | Capacitance                       | C               | 22 µF                 |
 | Capacitor Parasitic Resistance    | RC              | 20 mΩ                 |
 
+## Design process
+1. Utilize the control-to-output transfer function of the Buck converter and SISOtool to design the compensator, ensuring that the Buck converter's stability in the frequency domain is sufficient.
 
-# Design Schematic
+2. Use PLECS in Simulink to build the Buck converter power stage and PWM, and verify whether its operation (steady state) meets the specifications.
+
+3. Create a Matlab/Simulink simulation to verify the correctness of the Buck converter with the compensator in both steady and transient states.
+## Design Schematic
 
 ![design_schematic](../image/design_schematic.png)
