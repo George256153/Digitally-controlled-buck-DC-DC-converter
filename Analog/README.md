@@ -1,5 +1,4 @@
 # Analog Voltage Mode Buck DC-DC Converter
-This folder contains the following components:
 
 ## Objectives
 1. Design analog voltage mode buck converter with Matlab SISOTool
@@ -23,8 +22,6 @@ This folder contains the following components:
 | Capacitor Parasitic Resistance    | RC              | 20 mΩ                 |
 
 
-# Image Overview
+# Design Schematic
 
-This is the translated image for the Analog project.
-
-![Translated Image](../image/translated_image_en.png)
+![design_schematic](../image/design_schematic.png)
