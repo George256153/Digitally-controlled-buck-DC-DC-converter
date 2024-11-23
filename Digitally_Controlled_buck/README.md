@@ -2,13 +2,13 @@
 
 ## Objectives
 1. Design an digital voltage mode buck converter
-- ADC, DPWM selection
+   - ADC, DPWM selection
 2. Design an digital compensator with Matlab SISOTool
-- Design by Emulation (DBE) Flow
+   - Design by Emulation (DBE) Flow
 3. Construct Simulink behavior model of digital buck converter with PLECS and Matlab Simulink
 4. Evaluate LCO
-- Static situation (A1, A2)
-- Dynamic situation (B1, B2)
+   - Static situation (A1, A2)
+   - Dynamic situation (B1, B2)
 
 ## System Specification
 | Parameter                         | Symbol                  | Size                  |
@@ -28,10 +28,20 @@
 ## Design process
 1. Explore the design considerations for ADC & DWPM module
 
-2. Design digital compensator using Design by Emulation (DBE) Flow
-   -DBE flow detaol
+2. Design digital compensator using Design by Emulation (DBE) Flow  
+   - DBE flow detail (Left: Flowchart ; Right: RED LINE process of the Transformation Diagram)
 
-4. Create a Matlab/Simulink simulation to verify the correctness of the Buck converter with the compensator in both steady and transient states.
+<div style="display: flex; justify-content: space-around;">
+  <img src="../image/DBE.png" alt="DBE" width="30%">
+  <img src="../image/DBE2.png" alt="DBE2" width="68%">
+</div>
+
+3. Conduct digital buck converter closed-loop simulation (including power stage, ADC, 
+PWM and compensator)
+
+
+4. Explore & Simulate LCO violations
+<img src="../image/LCO.png" alt="LCO" width="80%">
+
 ## Design Schematic
-
-![design_schematic](../image/schematic2.png)
+<img src="../image/schematic2.png" alt="schematic2" width="80%">
