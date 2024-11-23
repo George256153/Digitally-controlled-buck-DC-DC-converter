@@ -33,4 +33,4 @@
 3. Create a Matlab/Simulink simulation to verify the correctness of the Buck converter with the compensator in both steady and transient states.
 ## Design Schematic
 
-![design_schematic](../image/design_schematic.png)
+![design_schematic](../image/schematic2.png)
