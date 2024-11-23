@@ -34,6 +34,7 @@
 - Need to output encoded values from the ADC
 <img src="../image/ADC.png" alt="ADC" width="40%">
 - For a 2 V input voltage range, the ADC output corresponds to values from 0 to 255
+
 ## Design Schematic
 <img src="../image/Compensator.png" alt="Compensator" width="80%">
 
