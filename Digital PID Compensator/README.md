@@ -29,22 +29,14 @@
 3. Multiply the coefficients with the input results to determine the number of bits and the internal value of LUT
 4. Build the Verilog code of digital compensator
    - Modulate the integer number to be consistent with the LUT results
-   - Fill in the
+   - Fill in the results in the Look-up-table
+   - truncation
    - Hardware Implementation structure
-     
-
-
-<div style="display: flex; justify-content: space-around;">
-  <img src="../image/DBE.png" alt="DBE" width="30%">
-  <img src="../image/DBE2.png" alt="DBE2" width="68%">
-</div>
-
-3. Conduct digital buck converter closed-loop simulation (including power stage, ADC, 
-PWM and compensator)
-
-
-4. Explore & Simulate LCO violations
-<img src="../image/LCO.png" alt="LCO" width="80%">
+     <img src="../image/LUT.png" alt="LUT" width="80%">
+5. Build Matlab Model with Modelsim
+6. Co-Simulation with Matlab/Modelsim
+   - Buck converter closed-loop simulation (including power stage, PWM, 
+compensator)
 
 ## Design Schematic
 <img src="../image/Compensator.png" alt="Compensator" width="80%">
