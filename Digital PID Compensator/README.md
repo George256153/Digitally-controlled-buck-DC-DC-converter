@@ -1,14 +1,9 @@
 # Digitally PID Compensator Implement
 
 ## Objectives
-1. Design an digital voltage mode buck converter
-   - ADC, DPWM selection
-2. Design an digital compensator with Matlab SISOTool
-   - Design by Emulation (DBE) Flow
-3. Construct Simulink behavior model of digital buck converter with PLECS and Matlab Simulink
-4. Evaluate LCO
-   - Static situation (A1, A2)
-   - Dynamic situation (B1, B2)
+1. Z-domain compensator quantization
+2. Coding with Verilog-HDL for digital compensator
+3. Co-Simulation with Matlab/Modelsim
 
 ## System Specification
 | Parameter                         | Symbol                  | Size                  |
@@ -26,10 +21,18 @@
 | Capacitor Parasitic Resistance    | RC              | 20 mΩ                 |
 
 ## Design process
-1. Explore the design considerations for ADC & DWPM module
+1. Choose the word-length of the LUTs
+2. Convert the compensator coefficients into binary form
+   - Necessary to shift the decimal numbers forward, convert them into binary, and then revert them afterward
+   - The precision of the conversion is positively correlated with the bit-shift amount
+   - The bit-shift amount must match the number of bits required for the LUT.
+3. Multiply the coefficients with the input results to determine the number of bits and the internal value of LUT
+4. Build the Verilog code of digital compensator
+   - Modulate the integer number to be consistent with the LUT results
+   - Fill in the
+   - Hardware Implementation structure
+     
 
-2. Design digital compensator using Design by Emulation (DBE) Flow  
-   - DBE flow detail (Left: Flowchart ; Right: RED LINE process of the Transformation Diagram)
 
 <div style="display: flex; justify-content: space-around;">
   <img src="../image/DBE.png" alt="DBE" width="30%">
@@ -44,4 +47,4 @@ PWM and compensator)
 <img src="../image/LCO.png" alt="LCO" width="80%">
 
 ## Design Schematic
-<img src="../image/schematic2.png" alt="schematic2" width="80%">
+<img src="../image/Compensator.png" alt="Compensator" width="80%">
