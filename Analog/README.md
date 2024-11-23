@@ -9,3 +9,8 @@ This folder contains the following components:
 
 ## Overview
 This project focuses on designing and simulating a digitally controlled buck converter with analog compensator design.
+# Image Overview
+
+This is the translated image for the Analog project.
+
+![Translated Image](../image/translated_image_en.png)
