@@ -60,7 +60,7 @@ The project involves two distinct representations of system specifications, each
 
 ## Design Schematic
 
-<img src="image/Schematic.png" alt="Schematic" width="70%">
+<img src="image/Schematic.png" alt="Schematic" width="90%">
 
 ## Design Stages
 
@@ -87,7 +87,7 @@ The project involves two distinct representations of system specifications, each
 - **Simulation**: A comprehensive closed-loop system was simulated, incorporating all previously designed modules. Simulation validated the system's stability and performance.
 - **Hardware Implementation**: Realized the digital design on an FPGA using Quartus, with the external power stage constructed on a PCB for real-world testing.
 ### Design Flow
-<img src="image/flow.png" alt="flow" width="70%">
+<img src="image/flow.png" alt="flow" width="90%">
 
 
 ## Simulation Tools
