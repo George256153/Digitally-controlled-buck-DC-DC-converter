@@ -91,9 +91,10 @@ The project involves two distinct representations of system specifications, each
 
 
 ## Simulation Tools
+- **Verilog HDL**: Facilitated the design and simulation of digital circuit modules.
 - **PLECS**: Used for circuit architecture and dynamic behavior simulations.
 - **Matlab/Simulink**: Utilized for system modeling and data analysis.
-- **Verilog HDL**: Facilitated the design and simulation of digital circuit modules.
+- **SISOTool**: Applied for compensator design and stability analysis in control systems.
 - **Quartus**: Used for FPGA implementation.
   
 ## Additional Explorations
