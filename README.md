@@ -58,6 +58,10 @@ The project involves two distinct representations of system specifications, each
 | Capacitance                       | C               | 22 µF                 |
 | Capacitor Parasitic Resistance    | RC              | 20 mΩ                 |
 
+## Design Schematic
+
+<img src="image/Schematic.png" alt="Schematic" width="70%">
+
 ## Design Stages
 
 ### 1. Analog Voltage Mode Buck DC-DC Converter Design
@@ -82,6 +86,8 @@ The project involves two distinct representations of system specifications, each
 ### 6. Integration and Verification
 - **Simulation**: A comprehensive closed-loop system was simulated, incorporating all previously designed modules. Simulation validated the system's stability and performance.
 - **Hardware Implementation**: Realized the digital design on an FPGA using Quartus, with the external power stage constructed on a PCB for real-world testing.
+### Design Flow
+<img src="image/flow.png" alt="flow" width="70%">
 
 
 ## Simulation Tools
