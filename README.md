@@ -23,11 +23,10 @@ The primary aim is to deliver a stable output voltage with robust dynamic respon
 
 ## System Specification
 
-## Specifications Overview
-
 The project involves two distinct representations of system specifications, each serving different purposes:
 
 ### General Specification Table
+( Used in the **final implementation and FPGA verification phase** to summarize high-level system requirements)
 | Specification        | Value       |
 |----------------------|-------------|
 | Input Voltage        | 6V          |
@@ -44,83 +43,64 @@ The project involves two distinct representations of system specifications, each
 
 
 ### Detailed Parameter Table
-| Parameter                           | Symbol               | Size            |
-|-------------------------------------|----------------------|-----------------|
-| Input Voltage                       | \( V_g \)           | 6V              |
-| Output Voltage                      | \( V_o \)           | 1V              |
-| Switching Frequency                 | \( f_s \)           | 500kHz          |
-| Output Current                      | \( I_o \)           | 500mA - 1A      |
-| Steady State Output Voltage Ripple  | \( \Delta V_{OSS} \)| <2%             |
-| Steady State Inductor Current Ripple| \( \Delta I_{LSS} \)| <0.3A (30% \(I_{o_{max}}\)) |
-| OS%                                 |                      | <10%            |
-| Inductance                          | \( L \)             | 10μH            |
-| Inductor Parasitic Resistance       | \( R_L \)           | 68mΩ            |
-| Capacitance                         | \( C \)             | 22μF            |
-| Capacitor Parasitic Resistance      | \( R_C \)           | 20mΩ            |
+(Used during the **design and simulation phase** with Matlab Simulink and PLECS to fine-tune the internal parameters of the system.)
+| Parameter                         | Symbol                  | Size                  |
+|-----------------------------------|-------------------------|-----------------------|
+| Input Voltage                     |  Vg                    | 6 V                   |
+| Output Voltage                    |  Vo                     | 1 V                   |
+| Switching Frequency               |  fs                    | 500 kHz               |
+| Output Current                    |  Io                     | 500 mA - 1 A          |
+| Steady State Output Voltage Ripple| \( \Delta V_{OSS} \)    | < 2%                  |
+| Steady State Inductor Current Ripple | \( \Delta I_{LSS} \) | < 0.3 A (30% Io_max) |
+| OS%                               |                        | < 10%                 |
+| Inductance                        | L              | 10 µH                 |
+| Inductor Parasitic Resistance     | RL              | 68 mΩ                 |
+| Capacitance                       | C               | 22 µF                 |
+| Capacitor Parasitic Resistance    | RC              | 20 mΩ                 |
 
 ## Design Stages
 
 ### 1. Analog Voltage Mode Buck DC-DC Converter Design
-- **Focus**: 
-  - The design commenced with creating open-loop and closed-loop Buck DC-DC converters. The open-loop configuration established the foundational power stage design, while the closed-loop system incorporated feedback mechanisms to enhance dynamic response and stabilize output voltage under varying conditions.
-- **Simulation Tools**: 
-  - PLECS was the primary tool for simulating the circuit's power stage and dynamic behavior. Parameters such as inductance, capacitance, and equivalent series resistance (ESR) were meticulously tuned to meet design specifications.
-  - Simulations offered critical insights into voltage and current waveforms across different load scenarios, providing a robust understanding of system behavior.
-- **Design Considerations**: 
-  - The analog control loop was optimized by strategically placing poles and zeros, achieving ideal transient response and steady-state performance.
-  - Key metrics such as phase margin (>65°) and damping ratio (>0.7) were maintained to ensure stability, rapid settling times, and minimal oscillations.
-- **Results**: 
-  - **Uncompensated Behavior**: The deep blue waveform highlighted instability and oscillations inherent in the open-loop system.
-  - **Compensated Response**: The yellow waveform demonstrated improved stability, faster settling, and reduced overshoot after compensation.
-  - Both transient and steady-state simulations confirmed that the design met the performance criteria, ensuring reliability under varying load conditions.
+- **Focus**: The design commenced with creating open-loop and closed-loop Analog Buck DC-DC converters. The open-loop configuration established the foundational power stage design, while the closed-loop system incorporated feedback mechanisms to enhance dynamic response and stabilize output voltage under varying conditions.
+- **Design Considerations**: The analog control loop was optimized by strategically placing poles and zeros, achieving ideal transient response and steady-state performance.
+- Key metrics such as phase margin (>65°) and damping ratio (>0.7) were maintained to ensure stability, rapid settling times, and minimal oscillations.
 
 ### 2. Digital Compensator Design
 - **Methodology**: Transitioned the compensator from the s-domain to the z-domain using a "Design by Emulation" approach, enabling efficient digital control.
-- **Tools**: Matlab's SISOTool was employed to fine-tune poles, zeros, and gain, ensuring optimal phase margin and damping characteristics.
-- **Results**: Simulations confirmed the digital compensator's ability to stabilize the system, with dynamic and steady-state responses closely aligning with design goals.
 
 ### 3. Quantization and HDL Implementation
 - **Quantization**: The z-domain compensator was quantized into a high-precision lookup table (LUT) using Matlab.
 - **Hardware Realization**: Verilog HDL was utilized to implement the digital compensator, ensuring seamless integration into the hardware system.
-- **Results**: Co-simulation verified the compensator's precision and compatibility with the overall design.
 
 ### 4. DPWM Module Design
-- **Modules**: Various DPWM configurations, including Counter, Hybrid, Dither, and Dead-time modules, were designed, simulated, and compared.
-- **Results**: Comparative analysis identified the most efficient DPWM configuration, optimizing system performance in terms of precision and stability.
+- **Modules**: Various DPWM configurations, including Counter, Hybrid, Dither, and Dither with dead-time control modules, were designed, simulated, and compared.
 
 ### 5. ADC Encoder Implementation
 - **Design Considerations**: Integrated essential components such as transport delay, zero-order hold, quantizer, and saturation modules to enhance ADC performance.
 - **Integration**: Successfully combined the ADC encoder with the digital compensator, DPWM, and power stage, creating a cohesive system.
-- **Results**: Output voltage consistently stabilized at 1V, with smooth transitions in current between 0.5A and 1A during dynamic load changes.
 
 ### 6. Integration and Verification
 - **Simulation**: A comprehensive closed-loop system was simulated, incorporating all previously designed modules. Simulation validated the system's stability and performance.
 - **Hardware Implementation**: Realized the digital design on an FPGA using Quartus, with the external power stage constructed on a PCB for real-world testing.
-- **Results**: Hardware validation results mirrored simulation outcomes, confirming the design's reliability and operational accuracy.
-
----
-
-## Specifications
-- **Input Voltage**: 6V
-- **Output Voltage**: 1V
-- **Switching Frequency**: 500kHz
-- **DPWM Resolution**: 8.2mV
-- **ADC Resolution**: 30mV
-- **System Clock**: 32MHz
-- **Phase Margin**: >65°
-- **Current Range**: 500mA to 1A
-
----
-
-## Results
-- **Steady-State Performance**: Output voltage stabilized at 1V, with current smoothly transitioning between light and heavy loads.
-- **Transient Response**: Load-switching simulations demonstrated minimal overshoot and fast settling times, affirming the system's robust dynamic response.
-- **Hardware Validation**: The FPGA-based implementation yielded results consistent with simulations, underscoring the design's precision and reliability.
 
 
 ## Simulation Tools
 - **PLECS**: Used for circuit architecture and dynamic behavior simulations.
 - **Matlab/Simulink**: Utilized for system modeling and data analysis.
 - **Verilog HDL**: Facilitated the design and simulation of digital circuit modules.
+- **Quartus**: Used for FPGA implementation.
+  
+## Additional Explorations
+- **Analog buck converter in PLECS Standalone**
+  - Using PLECS Standalone to model and analyze time-domain and frequency-domain waveforms of a Buck converter under different load condition
+  - Compare the simulation results and usability between PLECS Blockset and Standalone approaches.
+- **Buck converter with digital control in PLECS Standalone**
+  - Transitioned the compensator from the s-domain to the z-domain, leveraged previous specifications to implement the z-domain transfer function into PLECS Standalone for simulation and analysis.
+  - Adjusted the sampling frequency to analyze its impact on system performance under the following conditions:
+  - Compared time-domain waveforms under varying sampling frequencies to validate the compensator's stability and accuracy.
+- **Deisgn & Analysis of Flyback**
+  - Simulate Flyback open-loop in MATLAB/Simulink and verify transfer function
+  - Design compensators in SISOTOOL and convert to circuit components
+  - Simulate closed-loop system with compensators in MATLAB/Simulink.
 
----
+
