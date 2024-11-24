@@ -21,22 +21,42 @@ digitally controlled Buck converter system.
 ## Objective
 The primary aim is to deliver a stable output voltage with robust dynamic response, meeting stringent requirements for high-performance power management in modern applications. This effort utilizes cutting-edge simulation and hardware tools to validate the design comprehensively.
 
-## Design Specification
+## System Specification
 
-| Specification      | Value        |
-|--------------------|--------------|
-| Input Voltage      | 6V           |
-| Output Voltage     | 1V           |
-| Switching Frequency| 500kHz       |
-| Current Range      | 500mA-1A     |
-| Inductor/ESR       | 10μH/30mΩ    |
-| Capacitor/ESR      | 22μF/20mΩ    |
-| System Clock       | 32MHz        |
-| Operating Mode     | PWM          |
-| DPWM Resolution    | 8.2mV        |
-| ADC Resolution     | 30mV         |
-| ADC Sampling Rate  | 500kHz       |
-| Phase Margin       | >65°         |
+## Specifications Overview
+
+The project involves two distinct representations of system specifications, each serving different purposes:
+
+### General Specification Table
+| Specification        | Value       |
+|----------------------|-------------|
+| Input Voltage        | 6V          |
+| Output Voltage       | 1V          |
+| Switching Frequency  | 500kHz      |
+| Current Range        | 500mA-1A    |
+| Inductor/ESR         | 10μH/30mΩ   |
+| Capacitor/ESR        | 22μF/20mΩ   |
+| System Clock         | 32MHz       |
+| DPWM Resolution      | 8.2mV       |
+| ADC Resolution       | 30mV        |
+| ADC Sampling Frequency | 500kHz    |
+| Phase Margin         | >65°        |
+
+
+### Detailed Parameter Table
+| Parameter                           | Symbol               | Size            |
+|-------------------------------------|----------------------|-----------------|
+| Input Voltage                       | \( V_g \)           | 6V              |
+| Output Voltage                      | \( V_o \)           | 1V              |
+| Switching Frequency                 | \( f_s \)           | 500kHz          |
+| Output Current                      | \( I_o \)           | 500mA - 1A      |
+| Steady State Output Voltage Ripple  | \( \Delta V_{OSS} \)| <2%             |
+| Steady State Inductor Current Ripple| \( \Delta I_{LSS} \)| <0.3A (30% \(I_{o_{max}}\)) |
+| OS%                                 |                      | <10%            |
+| Inductance                          | \( L \)             | 10μH            |
+| Inductor Parasitic Resistance       | \( R_L \)           | 68mΩ            |
+| Capacitance                         | \( C \)             | 22μF            |
+| Capacitor Parasitic Resistance      | \( R_C \)           | 20mΩ            |
 
 ## Design Stages
 
